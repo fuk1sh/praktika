@@ -53,131 +53,77 @@ namespace WpfApp3
             {
                 loginAGAIN.Text = "слишком длинный логин";
                 loginAGAIN.BorderBrush = Brushes.Red;
-                ;
+                await Task.Delay(1500);
+                loginAGAIN.Text = "";
+                loginAGAIN.BorderBrush = Brushes.Black;
+                loginAGAIN.BorderThickness = new Thickness(0.5);
             }
             else if (parol.Text != parolA.Text)
             {
                 parol.Text = "пароли не совпадают!";
                 parol.BorderBrush = Brushes.Red;
-               
+                await Task.Delay(1500);
+                parol.Text = "";
+                parol.BorderBrush = Brushes.Black;
+                parol.BorderThickness = new Thickness(0.5);
+
+                parolA.Text = "";
 
 
             }
-            else if (loginAGAIN.Text.Length < 3)
+            else if (loginAGAIN.Text.Length < 3 || parol.Text.Length <= 3)
             {
                 loginAGAIN.Text = "логин должен содержать хотя бы 3 символа";
                 loginAGAIN.BorderBrush = Brushes.Red;
-              
-            }
 
-            else if (password.Contains('!'))
-            {
-                parol.Text = "недопустимый символ";
+                parol.Text = "пароль должен содержать минимум 3 символа";
                 parol.BorderBrush = Brushes.Red;
-            }
 
-            else if (password.Contains('@'))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-               
-               
-            }
+                await Task.Delay(1500);
+                loginAGAIN.Text = "";
+                loginAGAIN.BorderBrush = Brushes.Black;
+                loginAGAIN.BorderThickness = new Thickness(0.5);
 
-            else if (password.Contains('#'))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-               
-                
-            }
-
-            else if (password.Contains('$'))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-                
-               
-            }
-
-            else if (password.Contains('%'))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-               
-               
-            }
-
-            else if (password.Contains('^'))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-                
-               
-            }
-            else if (password.Contains('*'))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-                
-               
-            }
-            else if (password.Contains('('))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-                
-              
-            }
-            else if (password.Contains(')'))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-                await Task.Delay(2000);
                 parol.Text = "";
-                
+                parol.BorderBrush = Brushes.Black;
+                parol.BorderThickness = new Thickness(0.5);
             }
-            else if (password.Contains('_'))
+            else if (password.Contains('!') || password.Contains('@')
+                || password.Contains('#')
+                || password.Contains('$')
+                || password.Contains('%')
+                || password.Contains('^')
+                || password.Contains('*')
+                || password.Contains('(')
+                || password.Contains(')')
+                || password.Contains('_')
+                || password.Contains('-')
+                || password.Contains('=')
+                || password.Contains('+'))
             {
                 parol.Text = "недопустимый символ";
                 parol.BorderBrush = Brushes.Red;
-                
-            }
-            else if (password.Contains('-'))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-                
-            }
-            else if (password.Contains('='))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-               
-            }
-            else if (password.Contains('+'))
-            {
-                parol.Text = "недопустимый символ";
-                parol.BorderBrush = Brushes.Red;
-               
-                
+                await Task.Delay(1500);
+                parol.Text = "";
+                parol.BorderBrush = Brushes.Black;
+                parol.BorderThickness = new Thickness(0.5);
             }
             else
-            { 
+            {
                 var login = loginAGAIN.Text;
 
                 var pass = parol.Text;
 
                 var EMAEL = email.Text;
 
-                var context = new AppDbContext(); 
+                var context = new AppDbContext();
                 var user_exists = context.Users.FirstOrDefault(x => x.Login == login);
-                if(user_exists is not null)
+                if (user_exists is not null)
                 {
                     MessageBox.Show("est takoy uje");
                     return;
                 }
-                var user= new User { Login = login, Password = pass, EMAEL=EMAEL};
+                var user = new User { Login = login, Password = pass, EMAEL = EMAEL };
                 context.Users.Add(user);
                 context.SaveChanges();
                 MessageBox.Show("xarow bro");

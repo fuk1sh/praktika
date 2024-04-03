@@ -44,7 +44,7 @@ namespace WpfApp3
         private void vxod(object sender, RoutedEventArgs e)
         {
             var login1 = login.Text;
-            var password = parol.Text;
+            var password = parol.Password;
             
             var context = new AppDbContext();
 
@@ -64,6 +64,11 @@ namespace WpfApp3
             Window rega = new Window2();
             rega.Show();
             this.Close();
+        }
+
+        private void gavno(object sender, MouseButtonEventArgs e)
+        {
+          
         }
     }
 }
