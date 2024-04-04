@@ -30,8 +30,9 @@
 
         <Image Source="image/xz.png" Grid.Row="2" Grid.Column="1" Height="40"/>
         <Image Source="image/ok2.png" Grid.Row="4" Grid.Column="1" Height="40"/>
-
+        
         <TextBlock Text="Не зарегистрированны?" Grid.Row="4" FontSize="10" VerticalAlignment="Top" Grid.Column="2" TextAlignment="Left" Margin="18,67,0,0" Grid.RowSpan="2"/>
+        <TextBlock Name="okaybracho" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" TextAlignment="Center" Background="LightCyan"/>
 
         <Image Grid.Row="4" Grid.Column="4" Height="45" Width="45" Source="image/ok.png" MouseDown="gavno" Margin="10,0,0,0"/>
 

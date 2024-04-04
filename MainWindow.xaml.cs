@@ -21,6 +21,7 @@ namespace WpfApp3
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public class User
         {
             public int Id { get; set; }
@@ -39,6 +40,7 @@ namespace WpfApp3
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private void vxod(object sender, RoutedEventArgs e)
@@ -51,12 +53,19 @@ namespace WpfApp3
             var user = context.Users.SingleOrDefault(x => x.Login == login1 && x.password == password);
             if (user is null) 
             {
-                abobin1.Content = "успех!!!";
+                MessageBox.Show("неправильный пароль");
             }
 
-            Window vxod = new Window1();
-            vxod.Show();
-            this.Close();
+            else
+            {
+                MessageBox.Show("успешно вошли в аккаунт");
+                Window rega = new Window1();
+                rega.Show();
+                this.Close();
+            }
+            
+
+
         }
 
         private void regBTN(object sender, RoutedEventArgs e)

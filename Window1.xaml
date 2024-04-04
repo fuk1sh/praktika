@@ -5,9 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Window1" Height="450" Width="800" Background="LightCyan">
     <Grid>
-        <TextBlock Text="КУДА ПАШОЛ ЗАБАНЕН " TextAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
-        <Button Content="извините пж!" Click="sorry" Height="50" Margin="56,24,631,360" Background="IndianRed"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Name ="fgf" Text="{Binding StringFormat=Login}" Grid.Row ="1" Grid.Column="1" Grid.ColumnSpan="3" TextAlignment="Center" VerticalAlignment="Center" Height="60" FontSize="30"/>
+        <Button Content="back" Click="sorry" Grid.ColumnSpan="2"  Height="80" Width="150" Background="IndianRed"/>
+
+        <Button Content="izm login" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Height="60" Width="150" Click="mamael"/>
+        <TextBox Name="izmlog" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Height="60" Width="300"/>
+
+        <Button Content="izm pass" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Height="60" Width="150"/>
+        <TextBox Name="izmpass" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Height="60" Width="300"/>
+        
     </Grid>
 </Window>

@@ -47,18 +47,21 @@ namespace WpfApp3
 
         private async void registr(object sender, RoutedEventArgs e)
         {
+            string emael = email.Text;
             string password = parol.Text;
 
-            if (loginAGAIN.Text.Length > 16)
+            //ПРОВЕРКА НА ДЛИНУ ЛОГИНА
+            if (loginAGAIN.Text.Length > 16 || loginAGAIN.Text.Length < 3)
             {
-                loginAGAIN.Text = "слишком длинный логин";
+                loginAGAIN.Text = "длина логина 3<x<16";
                 loginAGAIN.BorderBrush = Brushes.Red;
                 await Task.Delay(1500);
                 loginAGAIN.Text = "";
                 loginAGAIN.BorderBrush = Brushes.Black;
                 loginAGAIN.BorderThickness = new Thickness(0.5);
             }
-            else if (parol.Text != parolA.Text)
+            //ПРОВЕРКА НА СООТВЕТСТВИЕ ПАРОЛЕЙ
+            else if (parol.Text != parolA.Password)
             {
                 parol.Text = "пароли не совпадают!";
                 parol.BorderBrush = Brushes.Red;
@@ -66,28 +69,19 @@ namespace WpfApp3
                 parol.Text = "";
                 parol.BorderBrush = Brushes.Black;
                 parol.BorderThickness = new Thickness(0.5);
-
-                parolA.Text = "";
-
-
+                parolA.Password = "";
             }
-            else if (loginAGAIN.Text.Length < 3 || parol.Text.Length <= 3)
+            //ПРОВЕРКА НА ДЛИНУ ПАРОЛЯ
+            else if (parol.Text.Length <= 3 || parol.Text.Length > 16)
             {
-                loginAGAIN.Text = "логин должен содержать хотя бы 3 символа";
-                loginAGAIN.BorderBrush = Brushes.Red;
-
-                parol.Text = "пароль должен содержать минимум 3 символа";
+                parol.Text = "длина пароля 3 < X < 16";
                 parol.BorderBrush = Brushes.Red;
-
                 await Task.Delay(1500);
-                loginAGAIN.Text = "";
-                loginAGAIN.BorderBrush = Brushes.Black;
-                loginAGAIN.BorderThickness = new Thickness(0.5);
-
                 parol.Text = "";
                 parol.BorderBrush = Brushes.Black;
                 parol.BorderThickness = new Thickness(0.5);
             }
+            //ПРОВЕРКА НА ЗАПРЕЩЕННЫЕ СИМВОЛЫ
             else if (password.Contains('!') || password.Contains('@')
                 || password.Contains('#')
                 || password.Contains('$')
@@ -108,6 +102,7 @@ namespace WpfApp3
                 parol.BorderBrush = Brushes.Black;
                 parol.BorderThickness = new Thickness(0.5);
             }
+            //РЕГИСТРАЦИЯ
             else
             {
                 var login = loginAGAIN.Text;
@@ -120,25 +115,33 @@ namespace WpfApp3
                 var user_exists = context.Users.FirstOrDefault(x => x.Login == login);
                 if (user_exists is not null)
                 {
-                    MessageBox.Show("est takoy uje");
+                    abobka.Content = "est takoy uje";
                     return;
                 }
                 var user = new User { Login = login, Password = pass, EMAEL = EMAEL };
                 context.Users.Add(user);
                 context.SaveChanges();
-                MessageBox.Show("xarow bro");
 
+                abobka.Content = TextWrapping.Wrap;
+                abobka.Content = "успешная регистрация,перемещение на окно авторизации...";
+
+
+                await Task.Delay(2000);
                 Window uspex = new MainWindow();
                 uspex.Show();
                 this.Close();
+            }
             }
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
+            //назад кнопка назад
             Window back = new MainWindow();
             back.Show();
             this.Close();
         }
+
+        
     }
 }

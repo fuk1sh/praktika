@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,16 +20,39 @@ namespace WpfApp3
     /// </summary>
     public partial class Window1 : Window
     {
+        public class User
+        {
+            public int Id { get; set; }
+            public string Login { get; set; }
+            public string password { get; set; }
+        }
+
+        public class AppDbContext : DbContext
+        {
+            public DbSet<User> Users { get; set; }
+
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            {
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=kolbaster;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            }
+        }
+
         public Window1()
         {
             InitializeComponent();
+           
         }
-
+        
         private void sorry(object sender, RoutedEventArgs e)
         {
             Window sorry = new MainWindow();
             sorry.Show();
             this.Close();
+        }
+        string Login;
+        private void mamael(object sender, RoutedEventArgs e)
+        {
+ 
         }
     }
 }
